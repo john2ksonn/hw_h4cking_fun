@@ -1,0 +1,20 @@
+4byte messages sent by the remote containing bits that represent button presses.
+* every 8th bit is an odd parity bit and is not in the following data
+
+                  - Down
+                  |- Preset I
+                  ||
+                  ||    - F Button
+                  ||    |- Up
+                  ||    ||- Preset II
+                  ||    |||- Preset III
+                  ||    ||||
+     "T"     data || data||| 0D byte
+x  : 1010100 0110000 0110000 0001101 (nothing)
+F  : 1010100 0110000 0111000 0001101 (F button)
+Ip : 1010100 0110001 0110000 0001101 (preset I)
+II : 1010100 0110000 0110010 0001101 (preset II)
+III: 1010100 0110000 0110001 0001101 (preset II)
+MU : 1010100 0110000 0110100 0001101 (up)
+MD : 1010100 0110010 0110000 0001101 (down)
+

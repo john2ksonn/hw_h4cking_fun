@@ -1,0 +1,38 @@
+The remote sends 3byte (1) and 4byte (2) messages / packets
+The 8th bit is an odd parity bit and is not included in the following data
+
+x   = nothing pressed
+F   = F button pressed
+I   = preset I button pressed
+Ip  = preset I button pressed in para mode
+II  = preset II button pressed
+III = preset III button pressed
+MU  = move up
+
+* 3byte packets (1) seem to always be the same
+* 4byte packets (2) contain bits representing button presses
+    -> pressing multiple buttons not (yet) tested
+* for every eight 3byte packets (keepalive) there is one 4byte packet (button)
+
+                         - F button
+                         |
+      static? static? 0D byte
+      static? static?    |    0D byte
+x  1: 1010001 0110001 0001101
+x  2: 1010100 0110000 0110000 0001101
+F  1: 1010001 0110001 0001101
+F  2: 1010100 0110000 0111000 0001101
+Ip 3: 0010110 1101010 1111111 1010001 0110001 0001101 (para mode) (prob just a glitch, not yet reproduced)
+Ip 1: 1010001 0110001 0001101
+Ip 2: 1010100 0110001 0110000 0001101
+I2 1: 1010001 0110001 0001101
+I2 2: 1010100 0110001 0110000 0001101
+MU 1: 1010001 0110001 0001101
+MU 2: 1010100 0110000 0110100 0001101
+MD 1: 1010001 0110001 0001101
+MD 2: 1010100 0110010 0110000 0001101
+II 1: 1010001 0110001 0001101
+II 2: 1010100 0110000 0110010 0001101
+III1: 1010001 0110001 0001101
+III2: 1010100 0110000 0110001 0001101
+
